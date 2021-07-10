@@ -1,6 +1,3 @@
-version: '3'
-# Other docker-compose examples in /examples
-
 services:
   minecraft-tekkit:
     build: .
@@ -17,13 +14,13 @@ services:
     restart: always
     labels:
       - "--nogui"
-    networks:
-      - www
-
-networks:
-  www:
-    external:
-      name: www
+#    networks:
+#      - www
+#
+#networks:
+#  www:
+#    external:
+#      name: www
 
 volumes:
   mc-tekkit: {}
