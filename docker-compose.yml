@@ -11,7 +11,7 @@ services:
       EULA: "TRUE"
       INIT_MEM: "4G"
       MAX_MEM: "8G"
-    restart: always
+    restart: "no"
     labels:
       - "--nogui"
 #    networks:

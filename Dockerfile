@@ -11,8 +11,10 @@ ENV MAX_MEM=4G
 
 RUN wget -q ${URL} -O mc.zip
 RUN unzip mc.zip -d /data-temp
+RUN rm -f /data-temp/{server.properties,ops.json,banned-ips.json,banned-players.json,whitelist.json,usercache.json}
+RUN cp -ar /data-temp/* /data 
 
 COPY ./start.sh start.sh    
 RUN chmod +x ./start.sh
 
-ENTRYPOINT [ "./start.sh" ]
+ENTRYPOINT [ "./start.sh" ] 
