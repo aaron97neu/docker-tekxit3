@@ -1,7 +1,7 @@
 FROM openjdk:8-jdk                                                                                                                          
 WORKDIR /
 
-EXPOSE 25565
+EXPOSE 31415
 
 VOLUME [ "/data" ]
 
@@ -11,10 +11,11 @@ ENV MAX_MEM=4G
 
 RUN wget -q ${URL} -O mc.zip
 RUN unzip mc.zip -d /data-temp
-RUN rm -f /data-temp/{server.properties,ops.json,banned-ips.json,banned-players.json,whitelist.json,usercache.json}
-RUN cp -ar /data-temp/* /data 
 
 COPY ./start.sh start.sh    
-RUN chmod +x ./start.sh
+RUN chmod +x /data-temp/0.13.2TekxitPiServer/ServerLinux.sh
 
-ENTRYPOINT [ "./start.sh" ] 
+WORKDIR /data-temp/0.13.2TekxitPiServer/
+ENTRYPOINT [ "bash", "ServerLinux.sh" ] 
+
+

@@ -2,11 +2,10 @@ services:
   minecraft-tekkit:
     build: .
     ports:
-      - "26656:25565"
-      - "26666:26666" # for rcon
+      - "31415:31415"
     volumes:
       - "mc-tekkit:/data"
-      - "./server.properties:/data/server.properties"
+#      - "./server.properties:/data/server.properties"
     environment:
       EULA: "TRUE"
       INIT_MEM: "4G"
@@ -14,13 +13,5 @@ services:
     restart: "no"
     labels:
       - "--nogui"
-#    networks:
-#      - www
-#
-#networks:
-#  www:
-#    external:
-#      name: www
-
 volumes:
   mc-tekkit: {}
