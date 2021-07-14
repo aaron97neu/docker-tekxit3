@@ -13,4 +13,5 @@ RUN unzip -u tekxit.zip -x "*server.properties" "*ops.json" "*banned-ips.json" "
 RUN cp -a ${VERSION}/. . && rm -fr ${VERSION}/
 
 RUN chmod +x ./ServerLinux.sh
-ENTRYPOINT [ "bash", "ServerLinux.sh" ] 
+#ENTRYPOINT [ "bash", "./ServerLinux.sh" ]
+ENTRYPOINT ["/bin/sh", "-c" , "ls -al && bash ./ServerLinux.sh"]
