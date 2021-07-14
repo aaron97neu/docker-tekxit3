@@ -3,9 +3,15 @@ services:
     build: .
     ports:
       - "31415:31415"
+      - "25565:25565"
     volumes:
-      - "mc-tekkit:/data"
-#      - "./server.properties:/data/server.properties"
+      - "mc-tekkit:/tekxit"
+      - "./server.properties:/tekxit/server.properties"
+      - "./ops.json:/tekxit/ops.json"
+#     - "./banned-ips.json:/tekxit/banned-ips.json"
+#     - "./banned-players.json:/tekxit/banned-players.json"
+#     - "./usercache.json:/tekxit/usercache.json"
+#     - "./whitelist.json:/tekxit/whitelist.json"
     environment:
       EULA: "TRUE"
       INIT_MEM: "4G"

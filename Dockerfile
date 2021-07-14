@@ -1,21 +1,16 @@
 FROM openjdk:8-jdk                                                                                                                          
-WORKDIR /
 
-EXPOSE 31415
+RUN mkdir /tekxit/
+WORKDIR /tekxit/
 
-VOLUME [ "/data" ]
+ENV VERSION=0.13.2TekxitPiServer
+ENV URL=https://www.tekx.it/downloads/${VERSION}.zip
 
-ENV URL=https://www.tekx.it/downloads/0.13.2TekxitPiServer.zip
-ENV INIT_MEM=4G
-ENV MAX_MEM=4G
+RUN wget -q ${URL} -O tekxit.zip
 
-RUN wget -q ${URL} -O mc.zip
-RUN unzip mc.zip -d /data-temp
+# The excluded files will likely not be found, but let's be safe
+RUN unzip -u tekxit.zip -x "*server.properties" "*ops.json" "*banned-ips.json" "*banned-players.json" "*whitelist.json" "*usercache.json" -d /tekxit
+RUN cp -a ${VERSION}/. . && rm -fr ${VERSION}/
 
-COPY ./start.sh start.sh    
-RUN chmod +x /data-temp/0.13.2TekxitPiServer/ServerLinux.sh
-
-WORKDIR /data-temp/0.13.2TekxitPiServer/
+RUN chmod +x ./ServerLinux.sh
 ENTRYPOINT [ "bash", "ServerLinux.sh" ] 
-
-
